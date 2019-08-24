@@ -3,7 +3,7 @@
 Name:     php_cheat_sheet.php
 Purpose:  PHP programming language cheat sheet
 Author:   David Guimaraes, Computer Engineer
-Revision: February 9th, 2019 - initial version (1.0)
+Revision: February 9th, 2019 - initial version (1.1)
 
 	PHP CHEAT SHEET BY DAVID
 *
@@ -25,8 +25,10 @@ Revision: February 9th, 2019 - initial version (1.0)
 * 		FUNCTIONS										[Ok]
 *		IMPORTING CODE									[Ok]
 * 		SUPER GLOBALS									[Ok]
-*		MANIPULATING DATABASE							[**]
+*		MANIPULATING DATABASE							[+-]
 *
+*
+* This version includes the "MANIPULATING DATABASE" section.
 */
 
 
@@ -211,6 +213,7 @@ function identifier($arguments){
 /*#############################################################*/
 
 
+
 /*###################### IMPORTING CODE #######################*/
 
 include 'something.php';
@@ -236,5 +239,31 @@ if(!isset($_SESSION['username'])){
 }else{
 	echo"Welcome, ".$_SESSION['username']."! You are logged in!"
 }
+/*#############################################################*/
+
+
+
+/*################### MANIPULATING DATABASE ###################*/
+
+$dbServername = "localhost";
+$dbUsername = "root";
+$dbPassword = "";				//none
+$dbName = "";
+
+$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
+
+
+$sql = "SELECT * FROM tabela";
+$result = mysqli_query($conn, $sql);
+$resultCheck = mysqli_num_rows($result);
+
+if($resultCheck > 0){
+	while($row = mysqli_fetch_assoc($result)){
+		echo $row['id'].'<br>';
+	}
+}
+
+$sql = "INSERT INTO tabela(coluna1, coluna2, coluna3) VALUES(1, "valor2", "valor3")";
+mysqli_query($conn, $sql);
 /*#############################################################*/
 ?>
